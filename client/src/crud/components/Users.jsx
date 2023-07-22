@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./Users.css";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './Users.css';
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -9,14 +9,14 @@ function Users() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/users")
+      .get('https://vercel-api-beta-weld.vercel.app/users')
       .then((result) => setUsers(result.data))
       .catch((err) => console.log(err));
   }, []);
 
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:3001/delete/" + id)
+      .delete('https://vercel-api-beta-weld.vercel.app/delete/' + id)
       .then((res) => {
         console.log(res);
         window.location.reload();
@@ -25,27 +25,26 @@ function Users() {
   };
 
   const handleBack = () => {
-    navigate("/Home");
+    navigate('/Home');
   };
 
   return (
-    <div className="users-container">
-     
-      <div className="users-table">
+    <div className='users-container'>
+      <div className='users-table'>
         <h1>Add your notes! ✿❀✿❀</h1>
-        
-        <div className="back-container">
-    <button className="back-button" onClick={handleBack}>
+
+        <div className='back-container'>
+          <button className='back-button' onClick={handleBack}>
             Back
           </button>
         </div>
-       
-        <Link to="/create" className="add-button">
+
+        <Link to='/create' className='add-button'>
           New Note
         </Link>
-        <table className="table">
+        <table className='table'>
           <thead>
-            <tr className="table-row">
+            <tr className='table-row'>
               <th>Name</th>
               <th>For Who</th>
               <th>Notes</th>
@@ -59,15 +58,12 @@ function Users() {
                 <td>{user.forWho}</td>
                 <td>{user.message}</td>
                 <td>
-                  <div className="button-container">
-                    <Link
-                      to={`/update/${user._id}`}
-                      className="btn-success"
-                    >
+                  <div className='button-container'>
+                    <Link to={`/update/${user._id}`} className='btn-success'>
                       edit
                     </Link>
                     <button
-                      className="btn-danger"
+                      className='btn-danger'
                       onClick={() => handleDelete(user._id)}
                     >
                       delete
